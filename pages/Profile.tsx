@@ -133,7 +133,7 @@ function Profile() {
            <h5 className='text-lg'>Friends</h5>
            <h1>{userData.email}</h1>
        <h1>Your DOB:  {userData.date_of_birth}<br/></h1>   
-        <button className="bg-gray-300 hover:bg-gray-500 text-white my-1 py-1 rounded-md font-bold" onClick={() => router.push("/EditYourProfile")}>Edit profile</button>
+        <button className="bg-gray-900 hover:bg-gray-700 text-white my-1 py-1 rounded-md font-bold" onClick={() => router.push("/EditYourProfile")}>Edit profile</button>
            {/* <div className={"  min-h-screen "}>{children}</div> */}
            
            
