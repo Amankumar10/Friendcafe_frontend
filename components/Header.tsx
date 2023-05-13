@@ -31,7 +31,7 @@ function Header() {
                   src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                   alt="Workflow"
                 /> */}
-              <span className="font-semibold text-4xl tracking-tight">frindcafe</span>
+              <span className="font-semibold text-4xl tracking-tight">ashberri</span>
               
               </div>
               
