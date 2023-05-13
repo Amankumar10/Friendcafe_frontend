@@ -48,8 +48,8 @@ function Signup() {
       <body
         className="bg-gray-100">
         <div className="mb-5">
-          <h1 className='text-sky-400 text-6xl flex  justify-center'>frindcafe</h1><br />
-          <p className='text-gray-600 text-2xl flex justify-center '>People those how highly compatible  <br /> and  think  like U,connect in frindcafe...</p>
+          <h1 className='text-black text-6xl flex  justify-center'>ashberri</h1><br />
+          <p className='text-gray-600 text-2xl flex justify-center '>People those how highly compatible  <br /> and  think  like U,connect in ashberri...</p>
         </div>
         <div
           className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
@@ -59,7 +59,7 @@ function Signup() {
             <div className="border-0 rounded-lg shadow-lg relative flex flex-col  bg-white outline-none focus:outline-none">
               {/*header*/}
               <div className="flex items-start justify-between p-5 border-b ">
-                <h3 className="text-3xl text-sky-400 font-semibold">
+                <h3 className="text-3xl text-black font-semibold">
                   Sign Up
                 </h3>
 
