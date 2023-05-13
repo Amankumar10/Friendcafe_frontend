@@ -179,7 +179,7 @@ required
                       <label className="pl-1 block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1" htmlFor="grid-state">
                         Date of Birth (Provide correct DOB for your better future)
                       </label>
-                      <Field className="px-10 h-10 mb-2  border border-2 outline-violet-300 border-gray-200 rounded-lg" as="select" placeholder="DD" id='day' name='day' >
+                      <Field className="px-7 h-10 mb-2  border border-2 outline-violet-300 border-gray-200 rounded-lg" as="select" placeholder="DD" id='day' name='day' >
 
 
 
@@ -228,8 +228,8 @@ required
                       </Field>
 
 
-
-                      <Field className="px-10 h-10 mb-2  border border-2 outline-violet-300 border-gray-200 rounded-lg" as="select" placeholder="MM" name='month' >
+                      &nbsp;&nbsp;
+                      <Field className="px-7 h-10 mb-2  border border-2 outline-violet-300 border-gray-200 rounded-lg" as="select" placeholder="MM" name='month' >
 
 
 
@@ -258,9 +258,9 @@ required
 
                       </Field>
 
+                      &nbsp;&nbsp;
 
-
-                      <Field className="px-10 h-10 mb-2  border border-2 outline-violet-300 border-gray-200 rounded-lg" as="select" placeholder="YYYY" name='year' >
+                      <Field className="px-7 h-10 mb-1  border border-2 outline-violet-300 border-gray-200 rounded-lg" as="select" placeholder="YYYY" name='year' >
 
 
                         <option className="hidden">YYYY</option>
