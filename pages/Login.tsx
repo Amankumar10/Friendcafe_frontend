@@ -116,8 +116,8 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
         <div 
         onClick={() => router.push("/")}>
-          <h1 className='black text-6xl flex  justify-center'>frindcafe</h1><br />
-          <p className='text-gray-600 text-2xl flex justify-center '>frindcafe help to find people who </p> <p className='text-gray-600 text-2xl flex justify-center '>are highly compatible...</p><br />
+          <h1 className='black text-6xl flex  justify-center'>ashberri</h1><br />
+          <p className='text-gray-600 text-2xl flex justify-center '>ashberri help to find people who </p> <p className='text-gray-600 text-2xl flex justify-center '>are highly compatible...</p><br />
 
         </div>
 
