@@ -158,8 +158,8 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
         <div 
         >
-          <h1 className='black text-6xl flex  justify-center pt-7'>ashberri</h1><br />
-          <p className='text-gray-600 text-2xl flex justify-center '>ashberri help to find people who </p> <p className='text-gray-600 text-2xl flex justify-center '>are highly compatible...</p><br />
+          <h1 className='black text-5xl flex  justify-center pt-7 phone:text-1xl'>ashberri</h1><br />
+          <p className='text-gray-600 text-xl flex justify-center '>ashberri help to find people who </p> <p className='text-gray-600 text-xl flex justify-center '>are highly compatible...</p><br />
 
         </div>
 
@@ -173,7 +173,7 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
         {searchParams?.message && <p className="text-red-700 bg-red-100 py-2 px-5 rounded-md">{searchParams?.message}</p>}
       {/* <div className="px-7 py-4 shadow bg-white rounded-md flex flex-col gap-2"> */}
         {/* <input  placeholder="username" type="text" onChange={(e) => (Username.current = e.target.value)} ></input> */}
-        <input className="px-4 h-12   my-2 border border-1 outline-violet-300 border-gray-200 rounded-lg"  placeholder="email" type="email" onChange={(e) => (email.current = e.target.value)} ></input>
+        <input className="px-4   my-2 border border-1 outline-violet-300 border-gray-200 rounded-lg h-10 "  placeholder="email" type="email" onChange={(e) => (email.current = e.target.value)} ></input>
 
         {/* <input className="px-4 h-12 my-2 border border-1 outline-violet-300 border-gray-200 rounded-lg"   placeholder="Password" type="password"   onChange={(e) => (pass.current = e.target.value)}  >
 
@@ -181,7 +181,7 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
         </input> */}
         <div className="relative ">
-      <input className= "w-80 px-4 h-12 my-2 border border-1 outline-violet-300 border-gray-200 rounded-lg" 
+      <input className= "w-80 px-4 h-10 my-2 border border-1 outline-violet-300 border-gray-200 rounded-lg" 
         type={isPasswordHidden ? 'password' : 'text'}
         name="password"
         autoComplete="current-password"
@@ -243,7 +243,7 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
       </svg>
     </button>
   </div> */}
-        <button className="bg-violet-300 hover:bg-violet-400 text-white my-2 py-3 rounded-md font-bold" onClick={onSubmit}>Login</button>
+        <button className="bg-violet-300 hover:bg-violet-400 text-white my-2 py-2 rounded-md font-bold" onClick={onSubmit}>Login</button>
       {/* </div> */}
     {/* </div> */}
           {/* <input className="px-4 h-12   my-2 border border-1 outline-violet-300 border-gray-200 rounded-lg" type="text" placeholder="Email address or phone number" />
