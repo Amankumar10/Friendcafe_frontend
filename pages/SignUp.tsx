@@ -8,8 +8,12 @@ import { signIn } from 'next-auth/react';
 import { useRef } from 'react';
 import  { useState } from "react";
 import dynamic from "next/dynamic";
-
+import * as yup from 'yup';
 function Signup() {
+
+
+
+
 
   interface MyFormValues {
     name: string;
@@ -21,6 +25,35 @@ function Signup() {
     // profile_photo:string;
     // file: null;
   }
+
+
+  interface FormState {
+    name: string;
+    // lastName: string;
+    email: string;
+    password: string;
+    day: string;
+    month: string;
+    year: string;
+    errors: {
+      [key: string]: string;
+    };
+  }
+
+  const schema = yup.object().shape({
+    name: yup.string().required('Name is required'),
+    day: yup.string().required('day  is required'),
+    month: yup.string().required('month  is required'),
+    year: yup.string().required('year  is required'),
+
+    email: yup.string().email('Invalid email').required('Email is required'),
+    password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
+  });
+
+
+
+
+  
   const email = useRef("")
 
   const pass = useRef("")
@@ -35,6 +68,18 @@ function Signup() {
     setIsPasswordHidden(!isPasswordHidden);
   };
   const initialValues: MyFormValues = { name: "", email: "", password: "", day: "", month: "", year: "" }
+  // const handleSubmit = async (values: FormValues) => {
+  //   try {
+  //     await schema.validate(values, { abortEarly: false });
+  //     // Form is valid, submit data to server
+  //   } catch (err) {
+  //     const errors = {};
+  //     err.inner.forEach((e: Yup.ValidationError) => {
+  //       errors[e.path] = e.message;
+  //     });
+  //     throw errors;
+  //   }
+  // };
 
   const onSubmit = async () => {
     const result = await signIn("credentials", {

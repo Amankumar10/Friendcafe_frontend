@@ -28,10 +28,39 @@ import { useRef } from 'react';
 import { signIn } from 'next-auth/react';
 import { redirect } from 'next/dist/server/api-utils';
 
+import * as yup from 'yup';
 
 interface IProps {
   searchParams?: { [key: string]: string | string[] | undefined };
 }
+
+
+
+
+interface FormState {
+  name: string;
+  // lastName: string;
+  email: string;
+  password: string;
+  day: string;
+  month: string;
+  year: string;
+  errors: {
+    [key: string]: string;
+  };
+}
+
+const schema = yup.object().shape({
+  // name: yup.string().required('Name is required'),
+  // day: yup.string().required('day  is required'),
+  // month: yup.string().required('month  is required'),
+  // year: yup.string().required('year  is required'),
+
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
+});
+
+
 
 const Login = ({ searchParams }: IProps) => {
 
@@ -52,6 +81,7 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [showModal, setShowModal] = React.useState(true);
 
 
+  
   const togglePasswordVisibility = () => {
     setIsPasswordHidden(!isPasswordHidden);
   };

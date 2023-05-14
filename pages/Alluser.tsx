@@ -103,7 +103,7 @@ const {data,isSuccess} =  useAllUserPredictQuery(token)
 <>
 <h1  className="font-bold text-xl">Friends</h1>
 
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid  gap-4  phone:grid-cols-1 lg:grid-cols-3 md:grid-cols-2 "  >
 
 {data?.map((curElem:any) => (
 
@@ -119,11 +119,11 @@ const {data,isSuccess} =  useAllUserPredictQuery(token)
 
 
 
-     <div className="bg-gray-100 ">
+     <div className="bg-gray-100  ">
  <main className=" mx-auto   ">
-   <div className="px-2 py-2 ">
+   <div className="px-2 py-2  sm:bg">
      <ul className="">
-     <li className="bg-white rounded-lg shadow-lg overflow-hidden">
+     <li className="bg-red-100 rounded-lg shadow-lg overflow-hidden">
      <Link  href={`/${curElem.id}`}>
        <div className="relative">
          <img className="w-full h-64 object-cover" src={avatarUrl} alt={name} />
