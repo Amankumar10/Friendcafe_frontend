@@ -9,6 +9,7 @@ import { effect, useToast } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { InputControl, SubmitButton } from "formik-chakra-ui";
 // import { useState } from "react";
+import {  useSession } from "next-auth/react";
 
 // import { Link } from "react-router-dom";
 import Link from 'next/link';
@@ -65,6 +66,11 @@ const schema = yup.object().shape({
 const Login = ({ searchParams }: IProps) => {
 
 
+const Header = dynamic(() => import('../components/Header'), {
+    ssr: false
+  });
+  
+
 
 const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   // const [credentials, setcredentials] = useState({ email: " ", password: " " });
@@ -80,7 +86,11 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
   const [showModal, setShowModal] = React.useState(true);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  }
   
   const togglePasswordVisibility = () => {
     setIsPasswordHidden(!isPasswordHidden);
@@ -93,6 +103,7 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
       callbackUrl: "/",
     });
   }
+  const {data:session} = useSession()
 
 
   
@@ -138,15 +149,16 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
 
   return (
+<div>
 
-
+    {session?.user  ? <Header /> : null}
 
     <body
-      className="bg-gray-100   ">
+      className="bg-gray-100 h-screen  ">
 
         <div 
         >
-          <h1 className='black text-6xl flex  justify-center'>ashberri</h1><br />
+          <h1 className='black text-6xl flex  justify-center pt-7'>ashberri</h1><br />
           <p className='text-gray-600 text-2xl flex justify-center '>ashberri help to find people who </p> <p className='text-gray-600 text-2xl flex justify-center '>are highly compatible...</p><br />
 
         </div>
@@ -300,7 +312,8 @@ const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
 
 
-
+    
+    </div>
   )
 }
 
