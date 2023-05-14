@@ -130,16 +130,16 @@ const {data,isSuccess} =  useAllUserPredictQuery(token)
     
        </div>
        <div className="px-4 py-3">
-         <h2 className="text-gray-800 font-bold text-lg">
+         {/* <h2 className="text-gray-800 font-bold text-lg"> */}
          {/* <Link  href={`/${curElem.id}`}> */}
           
-          {curElem.FriendName}
+          {/* {curElem.FriendName} */}
           {/* <div className="absolute bottom-0 right-0 bg-gray-800 text-white py-2 px-4 rounded-bl-lg"> */}
          {/* </div> */}
           {/* </Link> */}
           {/* &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{curElem.Compatiblity} */}
-      {curElem.Compatiblity}
-          </h2>
+     <h1 className="text-5xl ">{curElem.FriendName}&nbsp;&nbsp;&nbsp;{curElem.Compatiblity}</h1> 
+          {/* </h2> */}
 
        </div>
        </Link>
