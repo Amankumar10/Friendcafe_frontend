@@ -536,10 +536,6 @@
 
 
 
-
-
-
-
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { getSession } from 'next-auth/react';
 
@@ -551,109 +547,92 @@ const UpdateUserForm: React.FC = () => {
     setName(e.currentTarget.value);
   };
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files && e.target.files[0];
-    setFile(selectedFile || null);
+  // const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const selectedFile = e.target.files && e.target.files[0];
+  //   setFile(selectedFile || null);
+  // };
+
+  // const handleSubmit = async (e: FormEvent) => {
+  //   e.preventDefault();
+  //   const session: any = await getSession();
+
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append('name', name);
+  //     file && formData.append('file', file);
+
+  //     const response = await fetch('http://127.0.0.1:8000/api/user/update/', {
+  //       method: 'PATCH',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         authorization: `Bearer ${session?.user.accessToken}`,
+  //       },
+  //       body: formData,
+  //     });
+
+  //     if (response.ok) {
+  //       const jsonData = await response.json();
+  //       // Handle success or navigate to a different page
+  //       // const username = jsonData.username;
+  //       // const email = jsonData.email;
+  //     } else {
+  //       // Handle error
+  //     }
+  //   } catch (error) {
+  //     // Handle error
+  //   }
+  // };
+
+
+
+  {/* handle file upload start */}
+  const handleFileUpload = (e: any) => {
+    console.log('inside handleFileUpload');
+    const file = e.target.files[0];
+    setFile(file);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    const session:any = await  getSession()
-
-    try {
-      const formData = new FormData();
-//formData.append('name', name);
-      file && formData.append('file', file);
-
-      const response = await fetch('http://127.0.0.1:8000/api/user/update/', {
-        method: 'PATCH',
-        headers: {
-                  "Content-Type": "application/json",
-                  'authorization': `Bearer ${session?.user.accessToken}`
-                },
-        body: formData,
-      });
-
-      if (response.ok) {
-        const jsonData = await response.json();
-        // Handle success or navigate to a different page
-        // const username = jsonData.username;
-        // const email = jsonData.email;
-        
-        
-      } else {
-        // Handle error
-      }
-    } catch (error) {
-      // Handle error
-    }
-  };
-
-  
-{/*handel file upload start*/}
-
-const handleFileUpload = (e:any) => {
-  console.log("inside HandelFile Upload ");
-  const file = e.target.files[0];
-  setFile(file);
-}
-
-
-
-
-{/*handel function start*/}
+  {/* handle function start */}
   const handleUpload = async () => {
-    const session:any = await  getSession()
-    if(file){
+    const session: any = await getSession();
+    if (file) {
       const formData = new FormData();
-      formData.append("file", file); //image is beaning raped for transferk
+      formData.append('name', name);
+      formData.append('file', file); // image is being wrapped for transfer
 
-      try{
-        
+      try {
         const response = await fetch('http://127.0.0.1:8000/api/user/update/', {
           method: 'PATCH',
           headers: {
-                    
-                    'authorization': `Bearer ${session?.user.accessToken}`
-                  },
+            authorization: `Bearer ${session?.user.accessToken}`,
+          },
           body: formData,
         });
 
-        if(response.ok){
-          console.log("Successfully uploded");
-        }else {
-          console.log("Failed uploading");
+        if (response.ok) {
+          console.log('Successfully uploaded');
+        } else {
+          console.log('Failed uploading');
         }
-
-      }catch (error){
-        console.error("error while transfer to api hmmmmmm ==", error)
+      } catch (error) {
+        console.error('Error while transferring to API:', error);
       }
 
       setFile(null);
     }
   };
 
-
-
   return (
-    
-<>
-<div>
-  file ko daal
-  <input type="file" name="file" onChange={handleFileUpload} /> {/* contain files*/}     
-  <button type="submit" onClick={handleUpload}>Update</button> {/* efoke the hanledUpload function */}
-</div>
-</>
+    <>
+      <div>
+        <input type="text" name="name" value={name} onChange={handleNameChange} />
+        
+
+        <input type="file" name="file" onChange={handleFileUpload} />
+        <button type="submit" onClick={handleUpload}>Updatefile</button>
+      </div>
+    </>
   );
 };
 
 export default UpdateUserForm;
-
-
-
-
-
-
-
-
-

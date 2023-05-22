@@ -308,6 +308,7 @@ export const authApi = createApi({
       url: `/update/`,
       method: 'PATCH',
      headers: {
+     'Content-Type': 'application/json',
      'authorization': `Bearer ${access}`,
    },
       // body: data,
