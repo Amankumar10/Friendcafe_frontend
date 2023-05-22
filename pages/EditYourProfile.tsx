@@ -542,6 +542,7 @@
 
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { getSession } from 'next-auth/react';
+
 const UpdateUserForm: React.FC = () => {
   const [name, setName] = useState('');
   const [file, setFile] = useState<File | null>(null);
@@ -561,7 +562,7 @@ const UpdateUserForm: React.FC = () => {
 
     try {
       const formData = new FormData();
-      formData.append('name', name);
+//formData.append('name', name);
       file && formData.append('file', file);
 
       const response = await fetch('http://127.0.0.1:8000/api/user/update/', {
@@ -588,24 +589,71 @@ const UpdateUserForm: React.FC = () => {
     }
   };
 
+  
+{/*handel file upload start*/}
+
+const handleFileUpload = (e:any) => {
+  console.log("inside HandelFile Upload ");
+  const file = e.target.files[0];
+  setFile(file);
+}
+
+
+
+
+{/*handel function start*/}
+  const handleUpload = async () => {
+    const session:any = await  getSession()
+    if(file){
+      const formData = new FormData();
+      formData.append("file", file); //image is beaning raped for transferk
+
+      try{
+        
+        const response = await fetch('http://127.0.0.1:8000/api/user/update/', {
+          method: 'PATCH',
+          headers: {
+                    
+                    'authorization': `Bearer ${session?.user.accessToken}`
+                  },
+          body: formData,
+        });
+
+        if(response.ok){
+          console.log("Successfully uploded");
+        }else {
+          console.log("Failed uploading");
+        }
+
+      }catch (error){
+        console.error("error while transfer to api hmmmmmm ==", error)
+      }
+
+      setFile(null);
+    }
+  };
+
+
+
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          value={name}
-          onChange={handleNameChange}
-        />
-      </label>
-      <label>
-        File:
-        <input type="file" name="file" onChange={handleFileChange} />
-      </label>
-      <button type="submit">Update</button>
-    </form>
+    
+<>
+<div>
+  file ko daal
+  <input type="file" name="file" onChange={handleFileUpload} /> {/* contain files*/}     
+  <button type="submit" onClick={handleUpload}>Update</button> {/* efoke the hanledUpload function */}
+</div>
+</>
   );
 };
 
 export default UpdateUserForm;
+
+
+
+
+
+
+
+
+
