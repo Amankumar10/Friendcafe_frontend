@@ -74,6 +74,7 @@
 
 import { Id } from '@reduxjs/toolkit/dist/tsHelpers';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { headers } from 'next/dist/client/components/headers';
 // import { access } from 'fs';
 interface Users {
   name: string;
@@ -128,8 +129,8 @@ export const authApi = createApi({
  // The base query to request data.
  // RTK Query ships with fetchBaseQuery, which is a lightweight fetch wrapper that automatically handles request headers and response parsing in a manner similar to common libraries like axios.
  baseQuery: fetchBaseQuery({
-  // baseUrl: 'http://127.0.0.1:8000/api/user/',
-  baseUrl: 'https://ashberri-api.onrender.com/api/user/',
+  baseUrl: 'http://127.0.0.1:8000/api/user/',
+  // baseUrl: 'https://ashberri-api.onrender.com/api/user/',
 
   // https://ashberri-api.onrender.com/
   // baseUrl:'https://jsonplaceholder.typicode.com/'
@@ -257,17 +258,27 @@ export const authApi = createApi({
 // user signup
   signupUser: builder.mutation({
     // query: (body: { name: string;email:string,password:string,day:string,year:string,month:string;  }) => {
-    query: (body: { name: string; email: string; password: string; day:string; month:string; year:string}) => {
+    query: (body: { name: string; email: string; password: string; day:string; month:string; year:string;}) => {
     // query: (body: { name: string; email: string; password: string; day:string; month:string; year:string; }) => {
 
 
     // query: (body:  User ) => {
+      console.log(typeof body);
 
       return {
+
         url: "register/",
         method: "post",
-        body,
-      };
+        headers: {
+               'Content-type': 'application/json; charset=UTF-8',
+              },
+
+        // api: {
+        //         bodyParser: false, // Disallow body parsing, consume as stream
+        //       },
+        
+        body
+        };
     },
 
   }),

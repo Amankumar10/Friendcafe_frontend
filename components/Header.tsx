@@ -260,34 +260,24 @@
 
 
 // "use client";
-
 import { Transition } from "@headlessui/react";
-
 import { useRouter } from "next/navigation";
-//  import { UserView }  from '../pages/user/UserView';
-// import Protect from './protect/page';
-// import SignUp from "../pages/SignUp";
 import { signIn, signOut, useSession } from "next-auth/react";
-// import mockRouter from 'next-router-mock';
 import dynamic from "next/dynamic";
-
 import { useState } from 'react'
 import Link from 'next/link'
 
 export default function Navbar() {
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  
   const {data:session} = useSession()
 
   return (
     <>
-    {session?.user ? ( 
-      
-      
-      
-      
+
+    {session?.user ? (
     <nav className="bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -387,9 +377,8 @@ export default function Navbar() {
         </div>
       )}
     </nav>
-
-
     ) : (null)}
+
     </>
   )
 }

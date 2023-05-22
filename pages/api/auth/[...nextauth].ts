@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signOut } from 'next-auth/react';
 import NextAuth,{NextAuthOptions} from "next-auth"
@@ -28,7 +21,6 @@ export const authOptions:NextAuthOptions = {
 
               password: { label: "Password", type: "password" }
             },
-            async authorize(credentials, req) {
         
               // Add logic here to look up the user from the credentials supplied
             //   const user = { id: "1", Username: "J Smith", email: "jsmith@example.com" }
@@ -42,48 +34,28 @@ export const authOptions:NextAuthOptions = {
         
             //     // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
             //   }
-            
-                 const {email,password } = credentials as any;
-                //  const res = await fetch('http://127.0.0.1:8000/api/user/login/',{
-                 const res = await fetch('http://ashberri-api.onrender.com/api/user/login/',{
-
-
-
-                  method:"POST",
-                  headers:{
-                    "Content-Type":"application/json"
-
+            async authorize(credentials, req) {
+                const {email,password } = credentials as any;
+                const res = await fetch('http://ashberri-api.onrender.com/api/user/login/', {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
                 },
-            
-                body:JSON.stringify({
-                  // Username,
+                body: JSON.stringify({
                   email,
                   password,
                 })
             })
-            
-            
             const user = await res.json();
-
-            // console.log({user});
-    
             if (res.ok && user) {
               return user;
             } else{
-            
             return null;
             }
           },
         }),
       ],
 
-
-
-
-        // session:{
-        //     strategy:"jwt"
-        // },
-   
         callbacks: {
           async jwt({ token, user }) {
             return { ...token, ...user };
@@ -97,21 +69,7 @@ export const authOptions:NextAuthOptions = {
         pages:{
           signIn:"/Login",
           signOut:"/"
-      }
+        }
       };
 
-
-
 export default NextAuth(authOptions)
-
-
-
-
-
-
-
-
-
-
-
-
