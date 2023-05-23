@@ -82,6 +82,9 @@ interface Users {
   day:string
   month:string
   year:string
+  accessToken:string;
+
+
   id:number
 }
 
@@ -95,6 +98,7 @@ interface CreatePostParams {
     day:string
     month:string
     year:string
+    access_token:string
  
   };
   access: string;
@@ -303,15 +307,14 @@ export const authApi = createApi({
 
 
 
-  updateUser: builder.mutation<Users, { id: number; data: Partial<Users> }>({
-    query: ( access) => ({
+  updateUser: builder.mutation<Users, { id: number; accessToken:string; formData:string; data: Partial<Users>  }>({
+    query: ( data) => ({
       url: `/update/`,
       method: 'PATCH',
-     headers: {
-     'Content-Type': 'application/json',
-     'authorization': `Bearer ${access}`,
-   },
-      // body: data,
+      headers: {
+        authorization: `Bearer ${data.accessToken}`,
+      },
+      body: data.formData,
     }),
   })
 
