@@ -46,8 +46,8 @@ function Profile() {
   const [userData, setUserData] = useState({
     email: "",
     name: "",
-    C_second:"",
-    D_second:"",
+    // C_second:"",
+    // D_second:"",
     date_of_birth:""
 
   })
@@ -61,8 +61,8 @@ function Profile() {
       setUserData({
         email: data.email,
         name: data.name,
-        C_second:data.C_second,
-        D_second:data.D_second,
+        // C_second:data.C_second,
+        // D_second:data.D_second,
         date_of_birth:data.date_of_birth
 
       })
@@ -70,15 +70,15 @@ function Profile() {
   }, [data, isSuccess])
 
   // Store User Data in Redux Store
-  // useEffect(() => {
-  //   if (data && isSuccess) {
+  useEffect(() => {
+    if (data && isSuccess) {
      
-  //     dispatch(setUserInfo({
-  //       email: data.email,
-  //       name: data.name
-  //       }))
-  //   }
-  // }, [data, isSuccess, dispatch])
+      dispatch(setUserInfo({
+        email: data.email,
+        name: data.name
+        }))
+    }
+  }, [data, isSuccess, dispatch])
 
 
 

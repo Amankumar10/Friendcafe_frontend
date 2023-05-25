@@ -307,16 +307,47 @@ export const authApi = createApi({
 
 
 
-  updateUser: builder.mutation<Users, { id: number; accessToken:string; formData:string; data: Partial<Users>  }>({
-    query: ( data) => ({
-      url: `/update/`,
+  // updateUser: builder.mutation<Users, { id: number; accessToken:string; formData:string; data: Partial<Users>  }>({
+  //   query: ( data) => ({
+  //     url: `/update/`,
+  //     method: 'PATCH',
+  //     headers: {
+  //       authorization: `Bearer ${data.accessToken}`,
+  //     },
+  //     body: data.formData,
+  //   }),
+  // })
+
+
+
+  // updateUser: builder.mutation({
+  //   query: ({data}) => ({
+  //     url: 'update/',
+  //     method: 'PATCH',
+  //     headers: {
+  //       'authorization': `Bearer ${data.access}`,
+  //     },
+  //     body: dataformData,
+  //   }),
+  // })
+
+
+
+  updateUser: builder.mutation({
+    query: ({access,formData}) => ({
+      url: 'update/',
       method: 'PATCH',
       headers: {
-        authorization: `Bearer ${data.accessToken}`,
+        'authorization': `Bearer ${access}`,
       },
-      body: data.formData,
+      body: formData,
     }),
   })
+
+
+
+
+
 
 // const body = { name, email, password, day:string; month:string; year:string }
 

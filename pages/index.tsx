@@ -162,12 +162,16 @@
 
 import React from 'react'
 // import Header from '../components/Header'
+import { useAppSelector } from "./../store/hooks";
 
 const Index = () => {
+  const { name } = useAppSelector((state) => state.auth);
+  console.log(name);
+
   return (
     <>
     {/* <Header/> */}
-     <div>index</div>
+     <div>index{name}</div>
     </>
   )
 }

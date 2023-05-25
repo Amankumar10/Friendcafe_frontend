@@ -266,6 +266,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import { useState } from 'react'
 import Link from 'next/link'
+import { useAppSelector } from "./../store/hooks";
+
 
 export default function Navbar() {
 
@@ -273,6 +275,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const {data:session} = useSession()
+  const { name } = useAppSelector((state) => state.auth);
+  console.log(name);
 
   return (
     <>
@@ -299,6 +303,7 @@ export default function Navbar() {
                   Profile
 
                 </Link>
+            {/* user name - {name} */}
                 {/* <Link className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/contact">
                   
                 </Link> */}
