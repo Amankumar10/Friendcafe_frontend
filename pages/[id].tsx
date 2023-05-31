@@ -41,7 +41,7 @@ interface BreakingNewsPageProps {
 // function  ends
 
 // main function 
-export default function MyData() {
+export default function Data() {
 
     const [users, setUsers] = useState([])
 

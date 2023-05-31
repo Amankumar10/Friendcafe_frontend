@@ -1,4 +1,4 @@
-// "use client"
+"use client"
 
 
 import React from 'react'
@@ -31,10 +31,10 @@ function Profile() {
   // const tok = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgwMjc4Nzk2LCJpYXQiOjE2ODAxMDU5OTYsImp0aSI6Ijk1YWY2NzdkMDVhMTQ5YzJhZWE1MjgyYTIwNjgyNDg1IiwidXNlcl9pZCI6NDV9.QjC3ItmiCQiTtx_5qWpwofS_n2xtITZ2mDayELxtlXk"
   // const [cart,setCart] = useState()
   const {data:session} = useSession();
-  console.log({data:session});
+  // console.log({data:session});
   const token:any = session?.user.accessToken;
 
-  console.log("token",token);
+  // console.log("token",token);
   const router = useRouter();
  
 
@@ -51,7 +51,7 @@ function Profile() {
     date_of_birth:""
 
   })
-  console.log("profile data",data);
+  // console.log("profile data",data);
 // console.log("email", userData. C_second);
 
 
@@ -70,15 +70,15 @@ function Profile() {
   }, [data, isSuccess])
 
   // Store User Data in Redux Store
-  useEffect(() => {
-    if (data && isSuccess) {
+  // useEffect(() => {
+  //   if (data && isSuccess) {
      
-      dispatch(setUserInfo({
-        email: data.email,
-        name: data.name
-        }))
-    }
-  }, [data, isSuccess, dispatch])
+  //     dispatch(setUserInfo({
+  //       email: data.email,
+  //       name: data.name
+  //       }))
+  //   }
+  // }, [data, isSuccess, dispatch])
 
 
 

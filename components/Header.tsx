@@ -275,8 +275,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const {data:session} = useSession()
-  const { name } = useAppSelector((state) => state.auth);
-  console.log(name);
+  // const { name } = useAppSelector((state) => state.auth);
+  // console.log(name);
 
   return (
     <>

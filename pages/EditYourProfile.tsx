@@ -1,10 +1,15 @@
 
+// import { useEffect } from 'react';
+
+//  import { useUpdateUserMutation } from "./api/authApi"
+//  import { signIn, signOut, useSession } from "next-auth/react";
+//  import { useAppSelector } from "./../store/hooks";
+//  import { useState, FormEvent, ChangeEvent } from 'react';
+
+//  import { useProfileQuery } from "./api/authApi";
 
 
-// import { useState, FormEvent, ChangeEvent } from 'react';
-// import { getSession } from 'next-auth/react';
-// import { useProfileQuery } from "./api/authApi";
-// import { useAppSelector } from "./../store/hooks";
+// import React from 'react'
 
 // const EditYourProfile = () => {
 //   const [values, setValues] = useState({
@@ -17,10 +22,6 @@
 //   });
 //   // const { name } = useAppSelector((state) => state.auth);
 //   // console.log(name);
-//   const token:any = session?.user.accessToken;
-
-//   const { data, isSuccess } =  useProfileQuery(token)
-
 //   const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
 //     const { name, value } = e.currentTarget;
 //     setValues((prevValues) => ({
@@ -37,101 +38,154 @@
 //     }));
 //   };
 
+
+
+//   const [userData, setUserData] = useState({
+//     email: "",
+//     name: "",
+//     // C_second:"",
+//     // D_second:"",
+//     day:"",
+//     month:"",
+//     year:"",
+//     // file:""
+
+
+//   })
+
+  
+//   const [updateUserMutation] = useUpdateUserMutation();
+  
+//   const {data:session} = useSession();
+//   const token:any = session?.user.accessToken
+
+
+
+//   const { data, isSuccess } =  useProfileQuery(token)
+
+
 //   const handleUpload = async () => {
-//     const session: any = await getSession();
-//     const { name, day, file, email, year, month } = values;
-//     const formData = new FormData();
-//     if (name) formData.append('name', name);
-//     if (email) formData.append('email', email);
-//     if (day) formData.append('day', day);
-//     if (year) formData.append('year', year);
-//     if (month) formData.append('month', month);
-//     file && formData.append('file', file);
+//   const { name, day, file, email, year, month } = values;
+//   const formData = new FormData();
+//   if (name) formData.append('name', name);
+//   if (email) formData.append('email', email);
+//   if (day) formData.append('day', day);
+//   if (year) formData.append('year', year);
+//   if (month) formData.append('month', month);
+//   file && formData.append('file', file);
 
-//     try {
-//       // const response = await fetch('http://ashberri-api.onrender.com/api/user/update/', {
-//       const response = await fetch('http://127.0.0.1:8000/api/user/update/', {
+//   try {
+//     const response = await updateUserMutation({
+//       access: token,
+//       formData: formData,
+//     });
 
-//         method: 'PATCH',
-//         headers: {
-//           authorization: `Bearer ${session?.user.accessToken}`,
-//         },
-//         body: formData,
-//       });
+//     if (response) {
+//     // if (response.ok) {
 
-//       if (response.ok) {
-//         console.log('Successfully uploaded');
-//         window.location.reload(); // Reload the page after successful upload
-//       } else {
-//         console.log('Failed uploading');
-//       }
-//     } catch (error) {
-//       console.error('Error while transferring to API:', error);
+//       console.log('Successfully uploaded');
+//       window.location.reload(); // Reload the page after successful upload
+//     } else {
+//       console.log('Failed uploading');
 //     }
+//   } catch (error) {
+//     console.error('Error while transferring to API:', error);
+//   }
 
-//     // Clear the file input
-//     setValues((prevValues) => ({
-//       ...prevValues,
-//       file: null,
-//     }));
-//   };
+//   // Clear the file input
+//   setValues((prevValues) => ({
+//     ...prevValues,
+//     file: null,
+//   }));
+// };
+
+
+
+//   // Store User Data in Local State
+//   useEffect(() => {
+//     if (data && isSuccess) {
+//       setUserData({
+//         email: data.email,
+//         name: data.name,
+//         day:data.day,
+//         month:data.month,
+//         year:data.year
+
+//       })
+//     }
+//   }, [data, isSuccess])
 
 //   return (
 //     <>
-
-//     {/* User Name - {name} */}
 //       <div>
+//         Your Current Name = 
 //         <input
 //           type="text"
 //           name="name"
 //           value={values.name}
 //           onChange={handleInputChange}
-//           placeholder="Enter name"
+//           placeholder={userData.name}
 //         />
+//         <br/>
+//         Your Current Email = 
 //         <input
 //           type="text"
 //           name="email"
 //           value={values.email}
 //           onChange={handleInputChange}
-//           placeholder="Enter email"
+//           // placeholder="Enter email"
+//           placeholder={userData.email}
+
+//           // <h1>{userData.email}</h1>
+
 //         />
+//         <br/>
+//         Your Current day = 
+
 //         <input
 //           type="text"
 //           name="day"
 //           value={values.day}
 //           onChange={handleInputChange}
-//           placeholder="Enter day"
+//           placeholder={userData.day}
+
+
 //         />
+//          <br/>
+//          Your Current Month = 
 //         <input
 //           type="text"
 //           name="month"
 //           value={values.month}
 //           onChange={handleInputChange}
-//           placeholder="Enter month"
+//           placeholder={userData.email}
 //         />
+//         <br/>
+//         Your Current Year = 
 //         <input
 //           type="text"
 //           name="year"
 //           value={values.year}
 //           onChange={handleInputChange}
-//           placeholder="Enter year"
+//           placeholder={userData.year}
 //         />
+//         <br/>
+//         Your Current File = 
 //         <input type="file" name="file" onChange={handleFileChange} />
-//         <button type="submit" onClick={handleUpload}>
-//           Update File
+//         <br/>
+
+//         <button className="bg-green-600 hover:bg-green-700 text-white my-2 py-3 px-4 mx-auto rounded-md font-bold w-fit"  type="submit" onClick={handleUpload}>
+//           Update 
 //         </button>
 //       </div>
 //     </>
 //   );
+
+
+
 // };
 
-//  export default EditYourProfile
-
-
-
-
-
-
+// export default EditYourProfile
 
 
 
@@ -140,16 +194,12 @@
 
 
 import { useEffect } from 'react';
-
- import { useUpdateUserMutation } from "./api/authApi"
- import { signIn, signOut, useSession } from "next-auth/react";
- import { useAppSelector } from "./../store/hooks";
- import { useState, FormEvent, ChangeEvent } from 'react';
-
- import { useProfileQuery } from "./api/authApi";
-
-
-import React from 'react'
+import { useUpdateUserMutation } from "./api/authApi";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { useAppSelector } from "./../store/hooks";
+import { useState, FormEvent, ChangeEvent } from 'react';
+import { useProfileQuery } from "./api/authApi";
+import Image from 'next/image';
 
 const EditYourProfile = () => {
   const [values, setValues] = useState({
@@ -160,8 +210,7 @@ const EditYourProfile = () => {
     month: '',
     file: null,
   });
-  // const { name } = useAppSelector((state) => state.auth);
-  // console.log(name);
+  
   const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setValues((prevValues) => ({
@@ -178,68 +227,53 @@ const EditYourProfile = () => {
     }));
   };
 
-
-
   const [userData, setUserData] = useState({
     email: "",
     name: "",
-    // C_second:"",
-    // D_second:"",
     day:"",
     month:"",
     year:"",
-    // file:""
+    file: ""
+  });
 
-
-  })
-
-  
   const [updateUserMutation] = useUpdateUserMutation();
-  
-  const {data:session} = useSession();
-  const token:any = session?.user.accessToken
+  const { data: session } = useSession();
+  const token: any = session?.user.accessToken;
 
-
-
-  const { data, isSuccess } =  useProfileQuery(token)
-
+  const { data, isSuccess } =  useProfileQuery(token);
 
   const handleUpload = async () => {
-  const { name, day, file, email, year, month } = values;
-  const formData = new FormData();
-  if (name) formData.append('name', name);
-  if (email) formData.append('email', email);
-  if (day) formData.append('day', day);
-  if (year) formData.append('year', year);
-  if (month) formData.append('month', month);
-  file && formData.append('file', file);
+    const { name, day, file, email, year, month } = values;
+    const formData = new FormData();
+    if (name) formData.append('name', name);
+    if (email) formData.append('email', email);
+    if (day) formData.append('day', day);
+    if (year) formData.append('year', year);
+    if (month) formData.append('month', month);
+    file && formData.append('file', file);
 
-  try {
-    const response = await updateUserMutation({
-      access: token,
-      formData: formData,
-    });
+    try {
+      const response = await updateUserMutation({
+        access: token,
+        formData: formData,
+      });
 
-    if (response) {
-    // if (response.ok) {
-
-      console.log('Successfully uploaded');
-      window.location.reload(); // Reload the page after successful upload
-    } else {
-      console.log('Failed uploading');
+      if (response) {
+        console.log('Successfully uploaded');
+        window.location.reload(); // Reload the page after successful upload
+      } else {
+        console.log('Failed uploading');
+      }
+    } catch (error) {
+      console.error('Error while transferring to API:', error);
     }
-  } catch (error) {
-    console.error('Error while transferring to API:', error);
-  }
 
-  // Clear the file input
-  setValues((prevValues) => ({
-    ...prevValues,
-    file: null,
-  }));
-};
-
-
+    // Clear the file input
+    setValues((prevValues) => ({
+      ...prevValues,
+      file: null,
+    }));
+  };
 
   // Store User Data in Local State
   useEffect(() => {
@@ -247,13 +281,13 @@ const EditYourProfile = () => {
       setUserData({
         email: data.email,
         name: data.name,
-        day:data.day,
-        month:data.month,
-        year:data.year
-
-      })
+        day: data.day,
+        month: data.month,
+        year: data.year,
+        file: data.file // Assuming the file URL is provided in the API response
+      });
     }
-  }, [data, isSuccess])
+  }, [data, isSuccess]);
 
   return (
     <>
@@ -264,7 +298,7 @@ const EditYourProfile = () => {
           name="name"
           value={values.name}
           onChange={handleInputChange}
-          placeholder={userData.name}
+          placeholder={userData.name || ''}
         />
         <br/>
         Your Current Email = 
@@ -273,32 +307,25 @@ const EditYourProfile = () => {
           name="email"
           value={values.email}
           onChange={handleInputChange}
-          // placeholder="Enter email"
-          placeholder={userData.email}
-
-          // <h1>{userData.email}</h1>
-
+          placeholder={userData.email || ''}
         />
         <br/>
         Your Current day = 
-
         <input
           type="text"
           name="day"
           value={values.day}
           onChange={handleInputChange}
-          placeholder={userData.day}
-
-
+          placeholder={userData.day || ''}
         />
-         <br/>
-         Your Current Month = 
+        <br/>
+        Your Current Month = 
         <input
           type="text"
           name="month"
           value={values.month}
           onChange={handleInputChange}
-          placeholder={userData.email}
+          placeholder={userData.month || ''}
         />
         <br/>
         Your Current Year = 
@@ -307,22 +334,31 @@ const EditYourProfile = () => {
           name="year"
           value={values.year}
           onChange={handleInputChange}
-          placeholder={userData.year}
+          placeholder={userData.year || ''}
         />
         <br/>
         Your Current File = 
+        {userData.file && (
+          <Image
+            src={userData.file}
+            alt="Profile Photo"
+            width={200}
+            height={200}
+          />
+        )}
         <input type="file" name="file" onChange={handleFileChange} />
         <br/>
 
-        <button className="bg-green-600 hover:bg-green-700 text-white my-2 py-3 px-4 mx-auto rounded-md font-bold w-fit"  type="submit" onClick={handleUpload}>
+        <button
+          className="bg-green-600 hover:bg-green-700 text-white my-2 py-3 px-4 mx-auto rounded-md font-bold w-fit"
+          type="submit"
+          onClick={handleUpload}
+        >
           Update 
         </button>
       </div>
     </>
   );
-
-
-
 };
 
-export default EditYourProfile
+export default EditYourProfile;
