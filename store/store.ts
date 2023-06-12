@@ -48,6 +48,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { authApi } from '../pages/api/authApi';
+import { friendApi } from '../pages/api/friendApi';
+
 import  authReducer  from "../pages/api/state/authSlice";
 import  userReducer  from "../pages/api/state/userSlice";
 import  modelReducer from "../pages/api/state/modelSlice";
@@ -58,7 +60,9 @@ export const store = configureStore({
     auth: authReducer,
     user_info: userReducer,
     user_model: modelReducer,
-    [authApi.reducerPath]: authApi.reducer
+    [authApi.reducerPath]: authApi.reducer,
+    [friendApi.reducerPath]: friendApi.reducer,
+
   },
 
   // middleware is also created for us, which will allow us to take advantage of caching, invalidation, polling, and the other features of RTK Query.

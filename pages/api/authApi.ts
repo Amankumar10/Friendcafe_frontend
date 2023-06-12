@@ -133,7 +133,7 @@ export const authApi = createApi({
  // The base query to request data.
  // RTK Query ships with fetchBaseQuery, which is a lightweight fetch wrapper that automatically handles request headers and response parsing in a manner similar to common libraries like axios.
  baseQuery: fetchBaseQuery({
-  baseUrl: 'http://127.0.0.1:8000/api/user/',
+  baseUrl: 'http://127.0.0.1:8000/account/',
   // baseUrl: 'https://ashberri-api.onrender.com/api/user/',
 
 
@@ -168,7 +168,7 @@ export const authApi = createApi({
 
 
   // AllUserPredict
-  AllUserPredict: builder.query<User[], void>({
+  AllUserPredict: builder.query({
     query: (access) => ({
       //  if (localStorage.getItem('token')) {
       url: 'Modelapi/',
@@ -220,32 +220,7 @@ export const authApi = createApi({
 
 
 
-  // signinUser: builder.mutation({
-  //   const token:string = localStorage.getItem('token')
-  //   query: (body: { email: string; password: string ; token:string = localStorage.getItem('token') }) => {
-  //     return {
-  //       url: "login/",
-  //       method: "post",
-  //       body,
-  //     };
-  //   },
-  // }),
-    
-//   signinUser: builder.mutation({
-//     query: (body: { email: string; password: string }) => {
-      
-//       //  if (localStorage.getItem('token')) {
-    
-//       return {
-//         url: "login/",
-//         method: "post",
-//         body,
-//       };
-      
-//   // }
-// },
-//   }),
-
+ 
   //SIGNIN
   signinUser: builder.mutation({
     query: (body: { email: string; password: string  }) => {
