@@ -160,20 +160,28 @@
 
 
 
-import React from 'react'
-// import Header from '../components/Header'
-import { useAppSelector } from "./../store/hooks";
+import { useGetUserProfileQuery } from '../pages/api/authApi';
+import { useAppSelector } from '../store/hooks';
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Index = () => {
-  const { name } = useAppSelector((state) => state.auth);
-  console.log(name);
+  const {data:session} = useSession();
+  const token:any= session?.user.accessToken;
+
+  const { data, error, isLoading } = useGetUserProfileQuery(token || '');
+
+  const userProfile = data?.user_profile;
 
   return (
-    <>
-    {/* <Header/> */}
-     <div>index{name}</div>
-    </>
-  )
-}
+    <div className="flex items-center justify-center h-screen bg-gray-100">
+      <div className="max-w-lg mx-auto p-4 bg-white shadow-md rounded-md">
+        <h1 className="text-3xl font-bold mb-4">Welcome to the Homepage!</h1>
+        <p className="text-lg">
+          Hello, {userProfile?.name}! This is a nice-looking homepage created using React.
+        </p>
+      </div>
+    </div>
+  );
+};
 
-export default Index
+export default Index;

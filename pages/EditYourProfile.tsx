@@ -99,74 +99,109 @@ const EditYourProfile = () => {
 
   return (
     <>
-      <div>
-        Your Current Name = 
-        <input
-          type="text"
-          name="name"
-          value={values.name}
-          onChange={handleInputChange}
-          placeholder={userData.name || ''}
-        />
-        <br/>
-        Your Current Email = 
-        <input
-          type="text"
-          name="email"
-          value={values.email}
-          onChange={handleInputChange}
-          placeholder={userData.email || ''}
-        />
-        <br/>
-        Your Current day = 
-        <input
-          type="text"
-          name="day"
-          value={values.day}
-          onChange={handleInputChange}
-          placeholder={userData.day || ''}
-        />
-        <br/>
-        Your Current Month = 
-        <input
-          type="text"
-          name="month"
-          value={values.month}
-          onChange={handleInputChange}
-          placeholder={userData.month || ''}
-        />
-        <br/>
-        Your Current Year = 
-        <input
-          type="text"
-          name="year"
-          value={values.year}
-          onChange={handleInputChange}
-          placeholder={userData.year || ''}
-        />
-        <br/>
-        Your Current File = 
-        {userData.file && (
-          <Image
-            src={userData.file}
-            alt="Profile Photo"
-            width={200}
-            height={200}
+    <div className="container mx-auto">
+      <fieldset className="mb-6">
+        <legend className="text-lg font-semibold mb-2">Personal Information</legend>
+        <div className="flex flex-col mb-4">
+          <label htmlFor="name" className="mb-2">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={values.name}
+            onChange={handleInputChange}
+            placeholder={userData.name || ''}
+            className="p-2 border border-gray-300 rounded-md focus:outline-none"
           />
-        )}
-        <input type="file" name="file" onChange={handleFileChange} />
-        <br/>
+        </div>
+        <div className="flex flex-col mb-4">
+          <label htmlFor="email" className="mb-2">Email</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            value={values.email}
+            onChange={handleInputChange}
+            placeholder={userData.email || ''}
+            className="p-2 border border-gray-300 rounded-md focus:outline-none"
+          />
+        </div>
+        <div className="flex flex-col mb-4">
+          <label htmlFor="day" className="mb-2">Day</label>
+          <input
+            type="text"
+            id="day"
+            name="day"
+            value={values.day}
+            onChange={handleInputChange}
+            placeholder={userData.day || ''}
+            className="p-2 border border-gray-300 rounded-md focus:outline-none"
+          />
+        </div>
+        <div className="flex flex-col mb-4">
+          <label htmlFor="month" className="mb-2">Month</label>
+          <input
+            type="text"
+            id="month"
+            name="month"
+            value={values.month}
+            onChange={handleInputChange}
+            placeholder={userData.month || ''}
+            className="p-2 border border-gray-300 rounded-md focus:outline-none"
+          />
+        </div>
+        <div className="flex flex-col mb-4">
+          <label htmlFor="year" className="mb-2">Year</label>
+          <input
+            type="text"
+            id="year"
+            name="year"
+            value={values.year}
+            onChange={handleInputChange}
+            placeholder={userData.year || ''}
+            className="p-2 border border-gray-300 rounded-md focus:outline-none"
+          />
+        </div>
+      </fieldset>
+      
+      <fieldset className="mb-6">
+        <legend className="text-lg font-semibold mb-2">Profile Photo</legend>
+        <div className="flex flex-col mb-4">
+          {userData.file && (
+            <Image
+              src={userData.file}
+              alt="Profile Photo"
+              width={200}
+              height={200}
+            />
+          )}
+          <input type="file" name="file" onChange={handleFileChange} className="mt-2" />
+        </div>
+      </fieldset>
 
-        <button
-          className="bg-green-600 hover:bg-green-700 text-white my-2 py-3 px-4 mx-auto rounded-md font-bold w-fit"
-          type="submit"
-          onClick={handleUpload}
-        >
-          Update 
-        </button>
-      </div>
-    </>
+      <button
+        className="bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-md font-bold"
+        type="submit"
+        onClick={handleUpload}
+      >
+        Update
+      </button>
+    </div>
+  </>
   );
 };
 
 export default EditYourProfile;
+
+
+
+
+
+
+
+
+
+
+
+
+

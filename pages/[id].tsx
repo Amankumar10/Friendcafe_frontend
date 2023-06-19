@@ -68,78 +68,45 @@
 
 
 // Using rtk using
-
+import { useSession } from "next-auth/react";
 import { useProfileByIdQuery } from "./api/authApi";
-import { useAllUserPredictQuery,useGetAllUserQuery,useGetAllUserIdQuery } from "./api/authApi";
 import { getSession } from 'next-auth/react';
-import { GetStaticPaths, GetStaticProps } from "next";
-import { GetServerSideProps} from "next"
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from 'next/router'
-import { useEffect,useState } from "react";
-// imports end
+import { useRouter } from 'next/router';
+import { useEffect, useState } from "react";
 
+interface UserData {
+  id: string;
+  FriendName: string;
+  Compatibility: number;
+}
 
+export default function MyData() {
+  const [users, setUsers] = useState<UserData[]>([]);
 
+  const router = useRouter();
+  const { id } = router.query;
+  const { data: session } = useSession();
+  const token = session?.user.accessToken;
 
-// main function 
-export default function myData() {
+  const { data, isSuccess } = useProfileByIdQuery({ access: token, id: id });
 
-    const [users, setUsers] = useState([])
+  useEffect(() => {
+    if (isSuccess) {
+      setUsers(data);
+    }
+  }, [data, isSuccess]);
 
-//  async function fetchData() {
-//     const router = useRouter()
-//     // const session:any = useSession();
+  return (
+    <div className="max-w-lg mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">User Data</h1>
 
-//     const  {id} = router.query
-//     const session:any = await  getSession()
- 
-//       const response = await fetch(`http://127.0.0.1:8000/api/user/Modelapi/?id=${id}`,{
-//       method: 'GET',
-//       headers: {
-       
-//        'authorization': `Bearer ${session?.user.accessToken}`,
-//       //  'authorization': `Bearer ${token}`,
-
-//     }
-//   })
-//   const data:any = await response.json();
-//       console.log(data);
-
-//     }
- 
-// fetchData()
-
-
-const router = useRouter()
-const  {id} = router.query
-// const session:any = await  getSession()
-const {data:session} = useSession();
-const token:any = session?.user.accessToken
-// console.log(token);
-  const {data,isSuccess} =  useProfileByIdQuery({access:token,id:id})
-
-  console.log(data);
-
-
-    return (
-      <div className="todos">
-
-
-        <ul>
-          {data?.map((user:any) => (
-            <div key={user.id}>
-              <div>
-              {user.FriendName}={user.Compatibility }
-              
-              </div></div>
-          ))}
-        </ul>
-  
-      </div>
-    );
-  }
-// main ends
-
-
-
+      <ul className="bg-white shadow-md p-4 rounded-md">
+        {users.map((user) => (
+          <li key={user.id} className="mb-2">
+            <div>{user.FriendName} = {user.Compatibility}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
