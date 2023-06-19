@@ -20,7 +20,7 @@ type User ={
   access:string
   FriendName:string
   data:any
-  Compatiblity:string
+  Compatibility :string
   day:string
   month:string
   year:string
@@ -98,12 +98,12 @@ export const authApi = createApi({
 
 // AllUserPredict
   AllUserPredict: builder.query({
-    query: (token) => ({
+    query: (access) => ({
       //  if (localStorage.getItem('token')) {
       url: 'Modelapi/',
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${access}`,
       }
 
       // headers: {
@@ -285,7 +285,7 @@ export const { useGetAllUserQuery,useAllUserPredictQuery, useSignupUserMutation,
 //   access:string
 //   FriendName:string
 //   data:any
-//   Compatiblity:string
+//   Compatibility :string
 //   day:string
 //   month:string
 //   year:string

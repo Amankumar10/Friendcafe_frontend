@@ -7,13 +7,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 export interface AuthState {
 
   FriendName: string | null;
-  Compatiblity: string | null;
+  Compatibility : string | null;
 }
 
 const initialState = {
 
   FriendName: "",
-  Compatiblity:""
+  Compatibility :""
 
 }
 
@@ -23,9 +23,9 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
 
-    setalluserPredict: (state, action:PayloadAction<{ FriendName:string,Compatiblity:string}>) => {
+    setalluserPredict: (state, action:PayloadAction<{ FriendName:string,Compatibility :string}>) => {
       state.FriendName = action.payload.FriendName;
-      state.Compatiblity = action.payload.Compatiblity;
+      state.Compatibility  = action.payload.Compatibility ;
 
       
 

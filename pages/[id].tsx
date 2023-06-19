@@ -8,7 +8,7 @@
 // interface User {
 //   id: string;
 //   FriendName: string;
-//   Compatiblity: string;
+//   Compatibility : string;
 // }
 
 // export default function Data() {
@@ -53,7 +53,7 @@
 //         {users.map((user) => (
 //           <div key={user.id}>
 //             <div>
-//               {user.FriendName}={user.Compatiblity}
+//               {user.FriendName}={user.Compatibility }
 //             </div>
 //           </div>
 //         ))}
@@ -130,7 +130,7 @@ const token:any = session?.user.accessToken
           {data?.map((user:any) => (
             <div key={user.id}>
               <div>
-              {user.FriendName}={user.Compatiblity}
+              {user.FriendName}={user.Compatibility }
               
               </div></div>
           ))}
