@@ -67,7 +67,8 @@ export const store = configureStore({
 
   // middleware is also created for us, which will allow us to take advantage of caching, invalidation, polling, and the other features of RTK Query.
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware),
+    getDefaultMiddleware().concat(authApi.middleware)
+    .concat(friendApi.middleware), 
 })
 
 // It will enable to refetch the data on certain events, such as refetchOnFocus and refetchOnReconnect.

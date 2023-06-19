@@ -1,52 +1,92 @@
+// // Without using rtk and using normal fetch api
+
+
+// import { useEffect, useState } from "react";
+// import { useRouter } from "next/router";
+// import { useSession } from "next-auth/react";
+
+// interface User {
+//   id: string;
+//   FriendName: string;
+//   Compatiblity: string;
+// }
+
+// export default function Data() {
+//   const [users, setUsers] = useState<User[]>([]);
+//   const router = useRouter();
+//   const { id } = router.query;
+//   const { data: session } = useSession();
+//   // const token: string | undefined = session?.user.accessToken;
+//   const token:any = session?.user.accessToken;
+
+
+//   useEffect(() => {
+//     async function fetchData() {
+//       try {
+//         const response = await fetch(
+//           `http://127.0.0.1:8000/account/Modelapi/?id=${id}`,
+//           {
+//             method: "GET",
+//             headers: {
+//               Authorization: `Bearer ${token}`,
+//             },
+//           }
+//         );
+//         const data = await response.json();
+//         // console.log(data);
+
+//         // Assuming the response data is an array of users
+//         setUsers(data);
+//       } catch (error) {
+//         console.error("Error fetching data:", error);
+//       }
+//     }
+
+//     if (id && token) {
+//       fetchData();
+//     }
+//   }, [id, token]);
+
+//   return (
+//     <div className="todos">
+//       <ul>
+//         {users.map((user) => (
+//           <div key={user.id}>
+//             <div>
+//               {user.FriendName}={user.Compatiblity}
+//             </div>
+//           </div>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
+
+
+
+
+
+
+// Using rtk using
+
 import { useProfileByIdQuery } from "./api/authApi";
 import { useAllUserPredictQuery,useGetAllUserQuery,useGetAllUserIdQuery } from "./api/authApi";
 import { getSession } from 'next-auth/react';
 import { GetStaticPaths, GetStaticProps } from "next";
-// import { GetServerSideProps} from "next"
+import { GetServerSideProps} from "next"
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from 'next/router'
 import { useEffect,useState } from "react";
 // imports end
 
-interface BreakingNewsPageProps {
-    newsArticles: NewsArticle[],
-  }
-
-  export interface NewsResponse {
-    articles: NewsArticle[],
-  }
-
-  export interface NewsArticle {
-    id: string,
-    ProfileName: string,
-    FriendName: string,
-    Compatiblity: string,
-  }
-
-  export interface NewsArticle {
-    id: string,
-    email: string,
-    name: string,
-    D_second: string,
-    C_second: string,
-    date_of_birth: string,
-    day: string,
-    year: string,
-    month: string
-  }
-// INTERFACE ENDS
 
 
-
-// function  ends
 
 // main function 
-export default function Data() {
+export default function myData() {
 
     const [users, setUsers] = useState([])
 
-
-// * we can also use fetchapi but in that we have write long code that why we are user rtk query
 //  async function fetchData() {
 //     const router = useRouter()
 //     // const session:any = useSession();
@@ -100,4 +140,6 @@ const token:any = session?.user.accessToken
     );
   }
 // main ends
+
+
 

@@ -14,7 +14,7 @@ const getAuthToken = () => {
 export const friendApi = createApi({
    reducerPath: 'friendApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '/friend/', // Replace '/api/' with the appropriate base URL for your API
+    baseUrl: 'http://127.0.0.1:8000/friend/', // Replace '/api/' with the appropriate base URL for your API
     prepareHeaders: (headers, { getState }) => {
       // const { auth } = getState();
       const {data:session} = useSession();
