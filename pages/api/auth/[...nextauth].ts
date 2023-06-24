@@ -60,6 +60,8 @@ export const authOptions:NextAuthOptions = {
         }),
       ],
 
+
+
         callbacks: {
           async jwt({ token, user }) {
             return { ...token, ...user };

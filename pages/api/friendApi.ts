@@ -60,10 +60,39 @@ const getAuthToken = () => {
           body: formData,
         }),
       }),
+
+
+      getAllUserFriendStatus: builder.query({
+        query: (access) => ({
+          url: 'friend-requests-status/',
+          method: 'GET',
+          headers: {
+            'authorization': `Bearer ${access}`,
+
+          },
+        }),
+      }),
+
+
+    
+      cancelFriendRequest: builder.mutation({
+        query: ({access,formData}) => ({
+          url: `cancel-friend-request/`,
+          method: 'DELETE',
+          headers: {
+            'authorization': `Bearer ${access}`,
+          },
+          
+          body: formData,
+          
+        }),
+      }),
+
+
   }),
 });
 
-export const { useSendFriendRequestMutation } = friendApi;
+export const { useSendFriendRequestMutation, useCancelFriendRequestMutation,useGetAllUserFriendStatusQuery } = friendApi;
 
 // export const { useSendFriendRequestMutation,useCancelFriendRequestMutation  } = friendApi;
 
