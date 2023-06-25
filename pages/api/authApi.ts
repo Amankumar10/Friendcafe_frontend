@@ -100,7 +100,7 @@ export const authApi = createApi({
   AllUserPredict: builder.query({
     query: (access) => ({
       //  if (localStorage.getItem('token')) {
-      url: 'Modelapi/',
+      url: 'friendStatusAndCompatibility/',
       method: 'GET',
       headers: {
         Authorization: `Bearer ${access}`,
@@ -113,21 +113,34 @@ export const authApi = createApi({
    
     })
     }),
-  
+
+//  UserPredictbyid
+UserPredictById: builder.query({
+  query: ({ access,id } ) => {
+   return {url:`friendStatusAndCompatibilityById/?id=${id}`,
+     method: 'GET',
+     headers: {
+      'authorization':  `Bearer ${access}`,
+    }}
+   }
+  }), 
+    // AllUserPredictById: builder.query({
+    //   query: ({access,formData}) => ({
+    //     url: 'FriendStatusAndCompatibilityById/',
+    //     method: 'GET',
+    //     headers: {
+    //       Authorization: `Bearer ${access}`,
+
+    //     },
+    //     body:formData
+    //   }),
+    // }),
 
 
 
 
- // UserPredictbyid
-  profileById: builder.query({
-     query: ({ access,id } ) => {
-      return {url:`Modelapi/?id=${id}`,
-        method: 'GET',
-        headers: {
-        'authorization': `Bearer ${access}`,
-       }}
-      }
-     }), 
+
+
 
 //PROFILE VIEW
 
@@ -205,20 +218,7 @@ export const authApi = createApi({
 })
 
 // Export hooks for usage in functional components, which are auto-generated based on the defined endpoints
-export const { useGetAllUserQuery,useAllUserPredictQuery, useSignupUserMutation,useGetAllUserIdQuery, useSigninUserMutation,useProfileByIdQuery  ,useUpdateUserMutation,useGetUserProfileQuery } = authApi
-
-
-
-
-
-
-
-
-
-
-
-
-
+export const { useGetAllUserQuery,useAllUserPredictQuery,useUserPredictByIdQuery, useSignupUserMutation,useGetAllUserIdQuery, useSigninUserMutation ,useUpdateUserMutation,useGetUserProfileQuery } = authApi
 
 
 
@@ -588,3 +588,13 @@ export const { useGetAllUserQuery,useAllUserPredictQuery, useSignupUserMutation,
 
 // // Export hooks for usage in functional components, which are auto-generated based on the defined endpoints
 // export const { useGetAllUserQuery,useProfileQuery,useAllUserPredictQuery, useSignupUserMutation,useGetAllUserIdQuery, useSigninUserMutation,useProfileByIdQuery  ,useUpdateUserMutation } = authApi
+
+
+
+
+
+
+
+
+
+

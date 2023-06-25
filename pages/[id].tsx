@@ -1,4 +1,4 @@
-// // Without using rtk and using normal fetch api
+// Without using rtk and using normal fetch api
 
 
 // import { useEffect, useState } from "react";
@@ -24,7 +24,7 @@
 //     async function fetchData() {
 //       try {
 //         const response = await fetch(
-//           `http://127.0.0.1:8000/account/Modelapi/?id=${id}`,
+//           `http://127.0.0.1:8000/account/friendStatusAndCompatibilityById/?id=${id}`,
 //           {
 //             method: "GET",
 //             headers: {
@@ -48,20 +48,25 @@
 //   }, [id, token]);
 
 //   return (
-//     <div className="todos">
-//       <ul>
-//         {users.map((user) => (
-//           <div key={user.id}>
-//             <div>
-//               {user.FriendName}={user.Compatibility }
-//             </div>
-//           </div>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
+//     <div className="max-w-lg mx-auto p-4">
+//     <h1 className="text-2xl font-bold mb-4">User Data</h1>
 
+//     <ul className="bg-white shadow-md p-4 rounded-md">
+//       {Array.isArray(users) ? (
+//         users.map((user) => (
+//           <li key={user.id} className="mb-2">
+//             <div>
+//               {user.FriendName} = {user.Compatibility}
+//             </div>
+//           </li>
+//         ))
+//       ) : (
+//         <li>No users available.</li>
+//       )}
+//     </ul>
+//   </div>
+// );
+// }
 
 
 
@@ -69,7 +74,7 @@
 
 // Using rtk using
 import { useSession } from "next-auth/react";
-import { useProfileByIdQuery } from "./api/authApi";
+import {useUserPredictByIdQuery} from "./api/authApi";
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from "react";
@@ -88,7 +93,7 @@ export default function MyData() {
   const { data: session } = useSession();
   const token = session?.user.accessToken;
 
-  const { data, isSuccess } = useProfileByIdQuery({ access: token, id: id });
+  const { data, isSuccess } = useUserPredictByIdQuery({ access: token, id: id });
 
   useEffect(() => {
     if (isSuccess) {
