@@ -39,8 +39,8 @@ const getAuthToken = () => {
     // The base query to request data.
     // RTK Query ships with fetchBaseQuery, which is a lightweight fetch wrapper that automatically handles request headers and response parsing in a manner similar to common libraries like axios.
     baseQuery: fetchBaseQuery({
-     baseUrl: 'http://127.0.0.1:8000/friend/'
-     // baseUrl: 'https://ashberri-api.onrender.com/api/user/',
+    //  baseUrl: 'http://127.0.0.1:8000/friend/'
+     baseUrl: 'https://ashberri-api.onrender.com/friend/'
 
     
     }),
