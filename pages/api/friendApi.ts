@@ -62,16 +62,16 @@ const getAuthToken = () => {
       }),
 
 
-      getAllUserFriendStatus: builder.query({
-        query: (access) => ({
-          url: 'friend-requests-status/',
-          method: 'GET',
-          headers: {
-            'authorization': `Bearer ${access}`,
+      // getAllUserFriendStatus: builder.query({
+      //   query: (access) => ({
+      //     url: 'friend-requests-status/',
+      //     method: 'GET',
+      //     headers: {
+      //       'authorization': `Bearer ${access}`,
 
-          },
-        }),
-      }),
+      //     },
+      //   }),
+      // }),
 
 
     
@@ -92,7 +92,7 @@ const getAuthToken = () => {
   }),
 });
 
-export const { useSendFriendRequestMutation, useCancelFriendRequestMutation,useGetAllUserFriendStatusQuery } = friendApi;
+export const { useSendFriendRequestMutation, useCancelFriendRequestMutation} = friendApi;
 
 // export const { useSendFriendRequestMutation,useCancelFriendRequestMutation  } = friendApi;
 
