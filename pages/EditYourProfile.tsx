@@ -8,8 +8,8 @@ import { useGetUserProfileQuery } from "./api/authApi";
 import Image from 'next/image';
 import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-// import { ExclamationIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
+import { Listbox } from '@headlessui/react';
 
 const EditYourProfile = () => {
   const [values, setValues] = useState({
@@ -54,7 +54,7 @@ const EditYourProfile = () => {
   const { data, error, isLoading, isSuccess } = useGetUserProfileQuery(token || '');
   const userProfile = data?.user_profile;
   
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setValues((prevValues) => ({
       ...prevValues,
@@ -95,6 +95,26 @@ const EditYourProfile = () => {
   };
 
 
+
+
+     const months = [
+     { value: '01', label: 'January' },
+     { value: '02', label: 'February' },
+     { value: '03', label: 'March' },
+     { value: '04', label: 'April' },
+     { value: '05', label: 'May' },
+     { value: '06', label: 'June' },
+     { value: '07', label: 'July' },
+     { value: '08', label: 'August' },
+     { value: '09', label: 'September' },
+     { value: '10', label: 'October' },
+     { value: '11', label: 'November' },
+     { value: '12', label: 'December' },
+   ]
+   const days = Array.from({ length: 31 }, (_, index) => String(index + 1));
+   const currentYear = new Date().getFullYear();
+   const years = Array.from({ length: 100 }, (_, index) => String(currentYear - index));
+
   // Store User Data in Local State
   useEffect(() => {
     if (userProfile && isSuccess) {
@@ -109,198 +129,189 @@ const EditYourProfile = () => {
     }
   }, [userProfile, isSuccess]);
 
-  const months = [
-    { value: '01', label: 'January' },
-    { value: '02', label: 'February' },
-    { value: '03', label: 'March' },
-    { value: '04', label: 'April' },
-    { value: '05', label: 'May' },
-    { value: '06', label: 'June' },
-    { value: '07', label: 'July' },
-    { value: '08', label: 'August' },
-    { value: '09', label: 'September' },
-    { value: '10', label: 'October' },
-    { value: '11', label: 'November' },
-    { value: '12', label: 'December' },
-  ];
 
-  const days = Array.from({ length: 31 }, (_, index) => String(index + 1));
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 100 }, (_, index) => String(currentYear - index));
+
+  
 
   return (
-    <Transition.Root show={true} as={Fragment}>
-      <Dialog as="div" className="fixed z-10 inset-0 overflow-y-auto" onClose={() => {}}>
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          {/* This element is to trick the browser into centering the modal contents. */}
-          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
-            &#8203;
-          </span>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enterTo="opacity-100 translate-y-0 sm:scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:mt-0 sm:text-left">
-                    <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                      Edit Profile
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <div className="space-y-4">
-                        <div>
-                          <label htmlFor="name" className="block font-medium">
-                            Name
-                          </label>
-                          <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            value={values.name}
-                            onChange={handleInputChange}
-                            className="rounded-lg w-full border-gray-300 shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
-                            placeholder={userData.name || ''}
-                          />
-                        </div>
-                        <div>
-                          <label htmlFor="email" className="block font-medium">
-                            Email
-                          </label>
-                          <input
-                            type="text"
-                            id="email"
-                            name="email"
-                            value={values.email}
-                            onChange={handleInputChange}
-                            className="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
-                            placeholder={userData.email || ''}
-                          />
-                        </div>
-                        <div>
-                          <label htmlFor="day" className="block font-medium">
-                            Birthday
-                          </label>
-                          <div className="flex space-x-2">
-                            <select
-                              id="day"
-                              name="day"
-                              value={values.day}
-                              onChange={handleChange}
-                              className="flex-grow border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
-                            >
-                              <option value="">Day</option>
-                              {days.map((day) => (
-                                <option key={day} value={day}>
-                                  {day}
-                                </option>
-                              ))}
-                            </select>
-                            <select
-                              id="month"
-                              name="month"
-                              value={values.month}
-                              onChange={handleChange}
-                              className="flex-grow border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
-                            >
-                              <option value="">Month</option>
-                              {months.map((month) => (
-                                <option key={month.value} value={month.value}>
-                                  {month.label}
-                                </option>
-                              ))}
-                            </select>
-                            <select
-                              id="year"
-                              name="year"
-                              value={values.year}
-                              onChange={handleChange}
-                              className="flex-grow border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
-                            >
-                              <option value="">Year</option>
-                              {years.map((year) => (
-                                <option key={year} value={year}>
-                                  {year}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <p className="mt-1 text-sm text-gray-500">
-                            Your Current DOB: {userData.day}/{userData.month}/{userData.year}
-                          </p>
-                        </div>
-                        <div>
-                          <label htmlFor="file" className="block font-medium">
-                            Profile Photo
-                          </label>
-                          <div className="flex items-center space-x-2">
-                            {userData.file && (
-                              <div className="w-32 h-32">
-                                <Image
-                                  src={userData.file}
-                                  alt="Profile Photo"
-                                  layout="responsive"
-                                  width={200}
-                                  height={200}
-                                />
-                              </div>
-                            )}
-                            <input
-                              type="file"
-                              id="file"
-                              name="file"
-                              onChange={handleFileChange}
-                              className="flex-grow border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"
+    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+      <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+        <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+          <div className="max-w-md mx-auto">
+            <div className="flex items-center space-x-5">
+              <div className="w-12 h-12 rounded-full bg-yellow-500 flex justify-center items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-3xl font-bold text-gray-700">Edit Profile</h2>
+            </div>
+            <form className="space-y-6 mt-5">
+              <div className="flex items-center">
+                <div className="flex flex-col w-full">
+                  <label className="text-sm font-bold text-gray-500 tracking-wide">Name</label>
+                  <input
+                    className="text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                    type="text"
+                    name="name"
+                    placeholder={userData.name || ''}
+                    value={values.name}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+              <div className="flex items-center">
+                <div className="flex flex-col w-full">
+                  <label className="text-sm font-bold text-gray-500 tracking-wide">Email</label>
+                  <input
+                    className="text-base py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                    type="email"
+                    name="email"
+                    placeholder={userData.email || ''}
+                    value={values.email}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+      <div className="mt-6">
+                 <div className="flex items-center mb-2">
+                   <label htmlFor="birthday" className="mr-2 font-semibold">Birthday</label>
+                   <span className="text-gray-500 text-sm">Your Current DOB={userData.day}/{userData.month}/{userData.year}</span>
+                 </div>
+                 <div className="grid grid-cols-3 gap-4 sm:grid-cols-auto">
+                   <div className="flex flex-col">
+                     <label htmlFor="day" className="sr-only">Day</label>
+                     <select
+                      id="day"
+                      name="day"
+                      value={values.day}
+                      onChange={handleChange}
+                      className="p-3 border border-gray-300 rounded-md focus:outline-none"
+                    >
+                      <option value="">Day</option>
+                      {days.map((day) => (
+                        <option key={day} value={day}>
+                          {day}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="month" className="sr-only">Month</label>
+                    <select
+                      id="month"
+                      name="month"
+                      value={values.month}
+                      onChange={handleChange}
+                      className="p-3 border border-gray-300 rounded-md focus:outline-none"
+                    >
+                      <option value="">Month</option>
+                      {months.map((month) => (
+                        <option key={month.value} value={month.value}>
+                          {month.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="flex flex-col">
+                    <label htmlFor="year" className="sr-only">Year</label>
+                    <select
+                      id="year"
+                      name="year"
+                      value={values.year}
+                      onChange={handleChange}
+                      className="p-3 border border-gray-300 rounded-md focus:outline-none"
+                    >
+                      <option value="">Year</option>
+                      {years.map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div></div>
+              <div className="flex items-center">
+                <div className="flex flex-col w-full">
+                  <label className="text-sm font-bold text-gray-500 tracking-wide">Profile Picture</label>
+                  <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                    <div className="space-y-1 text-center">
+                      {values.file ? (
+                        <Fragment>
+                          <div className="flex justify-center">
+                            <img
+                              className="h-20 w-20 mx-auto rounded-full"
+                              src={URL.createObjectURL(values.file)}
+                              alt="Profile"
                             />
                           </div>
-                          <p className="mt-1 text-sm text-gray-500">(Optional)</p>
-                        </div>
-                      </div>
+                          <div className="text-sm">
+                            <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                              <span>Change</span>
+                              <input
+                                id="file-upload"
+                                name="file"
+                                type="file"
+                                className="sr-only"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                              />
+                            </label>
+                          </div>
+                        </Fragment>
+                      ) : (
+                        <Fragment>
+                          <div className="flex justify-center">
+                            <div className="h-20 w-20 text-gray-400">
+                              <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                              </svg>
+                            </div>
+                          </div>
+                          <div className="text-sm">
+                            <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                              <span>Select a file</span>
+                              <input
+                                id="file-upload"
+                                name="file"
+                                type="file"
+                                className="sr-only"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                              />
+                            </label>
+                          </div>
+                        </Fragment>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <div>
                 <button
+                  className="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full"
                   type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                   onClick={handleUpload}
-                  disabled={isLoading}
                 >
-                  {isLoading ? 'Uploading...' : 'Save'}
-                </button>
-                <button
-                  type="button"
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:w-auto sm:text-sm"
-                  // onClick={() => signOut()}
-
-                  onClick={() => router.push("/Profile")}
-                >
-                  Cancel
+                  Save Changes
                 </button>
               </div>
-            </div>
-          </Transition.Child>
+            </form>
+          </div>
         </div>
-      </Dialog>
-    </Transition.Root>
+      </div>
+    </div>
   );
 };
 
@@ -372,7 +383,7 @@ export default EditYourProfile;
 //       [name]: value,
 //     }));
 //   };
-//   const handleUpload = async () => {
+//   const handleUpload = async () => {`
 //     const { name, day, file, email, year, month } = values;
 //     const formData = new FormData();
 //     if (name) formData.append('name', name);
